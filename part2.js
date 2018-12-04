@@ -39,13 +39,13 @@ const visitors = {};
 transformed.reduce((acc, val) => {
   for (let i = val.left; i < val.left + val.wide; i++) {
     for (let j = val.top; j < val.top + val.tall; j++) {
-      acc[`${i},${j}`] = acc[`${i},${j}`] + 1;
-      visitors[`${i},${j}`] = [...(visitors[`${i},${j}`] || []), val.id];
-      if (acc[`${i},${j}`] > 1) {
-        visitors[`${i},${j}`].forEach(e => {
+      const key = `${i},${j}`;
+      acc[key] = acc[key] + 1;
+      visitors[key] = [...(visitors[key] || []), val.id];
+      if (acc[key] > 1) {
+        visitors[key].forEach(e => {
           overlapped[e] = true;
         });
-        overlapped[val.id] = true;
       }
     }
   }
